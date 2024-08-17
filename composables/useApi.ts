@@ -1,18 +1,23 @@
 import { FetchError } from "ofetch";
-
 export default function useAPI() {
   const fetchData: Ref<any> = ref();
   const isLoading: Ref<boolean> = ref(false);
-  const errorLog: Ref<string> = ref('');
 
   const callAPI = async (url: string) => {
     isLoading.value = true;
+    
     try {
-        const res = await $fetch(url, { responseType: 'json' });
-        fetchData.value = res;
+      const response = await $fetch(url, { responseType: 'json' });
+      fetchData.value = response;
+
     } catch (error) {
-        const FetchError = error as FetchError;
-        errorLog.value = FetchError.message;
+      const FetchError = error as FetchError;
+      if (FetchError.response && FetchError.response.status === 404) {
+        throw showError({ statusCode: 404, statusMessage: 'Page Not Found' })
+      } else if (FetchError.response && FetchError.response.status <= 500) {
+        throw showError({ statusCode: FetchError.response?.status, statusMessage: FetchError.message })
+      }
+      
     } finally {
       isLoading.value = false;
     }
@@ -21,7 +26,6 @@ export default function useAPI() {
   return { 
     fetchData,
     isLoading,
-    errorLog,
     callAPI
   };
 }

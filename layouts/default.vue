@@ -1,16 +1,12 @@
 <script setup lang="ts">
-const colorStore = usePartyColor();
-const { getColorList } = colorStore;
-
-onBeforeMount( async() => {
-  await getColorList();
-})
 </script>
 
 <template>
   <div>
     <h1>Nuxt3PageItems</h1>
+    <NavBar />
     <slot />
+    <Footer />
   </div>
 </template>
 

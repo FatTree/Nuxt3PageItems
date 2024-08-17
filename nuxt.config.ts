@@ -13,5 +13,19 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
+  app: {
+		head: {
+			charset: 'utf-8',
+			viewport: 'width=device-width, initial-scale=1',
+			title: 'Athem',
+			meta: [
+				{
+					name: 'description',
+					content: 'Realworld Conduit was built by Nuxt3, Vue3',
+				},
+				{ name: 'keywords', content: 'vuejs,nuxt,vue3,nuxt3' },
+			],
+		},
+	},
 })
