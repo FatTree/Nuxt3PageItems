@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    Component: Landing
+    Page: ProductDetail
   </div>
 </template>
 

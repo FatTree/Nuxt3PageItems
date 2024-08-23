@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    Component: PurchaseOrder
+    Page: ProductList
   </div>
 </template>
 
